@@ -17,6 +17,15 @@ services:
       - store6
       - store7
 
+  app:
+    build: ./app
+    working_dir: /app
+    command: python3 app.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    
   store1:
     build: ./store
     working_dir: /store
