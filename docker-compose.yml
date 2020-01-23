@@ -17,6 +17,16 @@ services:
       - store6
       - store7
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - logger
+      - app
+
   app:
     build: ./app
     working_dir: /app
