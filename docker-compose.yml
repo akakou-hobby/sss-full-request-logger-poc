@@ -6,8 +6,8 @@ services:
     command: go run logger.go
     volumes:
       - ./logger:/logger
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     links:
       - store1
       - store2
@@ -17,6 +17,25 @@ services:
       - store6
       - store7
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./proxy/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - logger
+      - app
+
+  app:
+    build: ./app
+    working_dir: /app
+    command: python3 app.py
+    expose:
+      - "5000"
+    volumes:
+      - ./app:/app
+    
   store1:
     build: ./store
     working_dir: /store
