@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-var dbfile string = "data/db.sqlite3"
+var dbfile string = ""
 var db *sql.DB
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -23,10 +23,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	dbfile = os.Getenv("DB_FILE")
+    port := os.Getenv("PORT")
+
 	os.Remove(dbfile)
 	db, _ = sql.Open("sqlite3", dbfile)
 	db.Exec(`CREATE TABLE "payload" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "data" VARCHAR(255))`)
 
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
+    http.ListenAndServe(":" + port, nil)
 }
