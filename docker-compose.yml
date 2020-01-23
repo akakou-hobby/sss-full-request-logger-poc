@@ -8,6 +8,14 @@ services:
       - ./logger:/logger
     ports:
       - "8080:8080"
+    links:
+      - store1
+      - store2
+      - store3
+      - store4
+      - store5
+      - store6
+      - store7
 
   store1:
     build: ./store

@@ -1,0 +1,10 @@
+stores:
+  - http://store1/
+  - http://store2/
+  - http://store3/
+  - http://store4/
+  - http://store5/
+  - http://store6/
+  - http://store7/
+
+threshold: 5
