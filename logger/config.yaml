@@ -1,10 +1,10 @@
 stores:
-  - http://store1/
-  - http://store2/
-  - http://store3/
-  - http://store4/
-  - http://store5/
-  - http://store6/
-  - http://store7/
+  - http://store1:8001/
+  - http://store2:8002/
+  - http://store3:8003/
+  - http://store4:8004/
+  - http://store5:8005/
+  - http://store6:8006/
+  - http://store7:8007/
 
 threshold: 5
