@@ -20,16 +20,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	stmt.Exec(string(body))
 	stmt.Close()
 
+	fmt.Fprintf(w, "ok")
+
 }
 
 func main() {
 	dbfile = os.Getenv("DB_FILE")
-    port := os.Getenv("PORT")
+	port := os.Getenv("PORT")
 
 	os.Remove(dbfile)
 	db, _ = sql.Open("sqlite3", dbfile)
 	db.Exec(`CREATE TABLE "payload" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "data" VARCHAR(255))`)
 
 	http.HandleFunc("/", handler)
-    http.ListenAndServe(":" + port, nil)
+	http.ListenAndServe(":"+port, nil)
 }
