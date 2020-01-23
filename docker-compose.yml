@@ -1,0 +1,11 @@
+version: '3'
+services:
+  logger:
+    build: ./logger
+    working_dir: /logger
+    command: go run logger.go
+    volumes:
+      - ./logger:/logger
+    ports:
+      - "8080:8080"
+
