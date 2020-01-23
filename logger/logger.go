@@ -2,12 +2,16 @@ package main
 
 import (
 	"fmt"
+	"bytes"
 	"net/http"
-	"os"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	r.Write(os.Stdout)
+	var buffer bytes.Buffer
+
+	r.Write(&buffer)
+	fmt.Print(buffer.String())
+
 	fmt.Fprintf(w, "ok")
 }
 
