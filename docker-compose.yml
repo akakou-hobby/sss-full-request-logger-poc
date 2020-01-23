@@ -1,0 +1,103 @@
+version: '3'
+services:
+  logger:
+    build: ./logger
+    working_dir: /logger
+    command: go run logger.go
+    volumes:
+      - ./logger:/logger
+    ports:
+      - "8080:8080"
+    links:
+      - store1
+      - store2
+      - store3
+      - store4
+      - store5
+      - store6
+      - store7
+
+  store1:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/1.db
+      - PORT=8001
+    ports:
+      - "8001:8001"
+
+  store2:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/2.db
+      - PORT=8002
+    ports:
+      - "8002:8002"
+
+  store3:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/3.db
+      - PORT=8003
+    ports:
+      - "8003:8003"
+
+  store4:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/4.db
+      - PORT=8004
+    ports:
+      - "8004:8004"
+
+  store5:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/5.db
+      - PORT=8005
+    ports:
+      - "8005:8005"
+
+  store6:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/6.db
+      - PORT=8006
+    ports:
+      - "8006:8006"
+
+  store7:
+    build: ./store
+    working_dir: /store
+    command: go run store.go
+    volumes:
+      - ./store:/store
+    environment:
+      - DB_FILE=/store/data/7.db
+      - PORT=8007
+    ports:
+      - "8007:8007"
+
