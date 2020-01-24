@@ -39,20 +39,19 @@ func main() {
 
 		db.Close()
 	}
-    
-    ciphertext, _ := sss.Reconstruct(shares)
 
-    fmt.Print(ciphertext)
-    fmt.Print("\n\n---\n\n")
+	ciphertext, _ := sss.Reconstruct(shares)
 
+	fmt.Print(ciphertext)
+	fmt.Print("\n\n---\n\n")
 
 	key := []byte("0123456789abcdef")
-    block, err := aes.NewCipher(key)
-    fmt.Print(err)
+	block, err := aes.NewCipher(key)
+	fmt.Print(err)
 
-    fmt.Print("\n\n---\n\n")
+	fmt.Print("\n\n---\n\n")
 
-    iv := []byte{0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f}
+	iv := []byte{0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f}
 	//io.ReadFull(rand.Reader, iv)
 
 	/* dectrypt */
