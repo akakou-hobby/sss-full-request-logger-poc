@@ -22,8 +22,7 @@ type Config struct {
 var config Config
 var stores []string
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	/* set variables */
+func encrypt(buffer bytes.Buffer) []sss.Share {
 	stores = config.Stores
 
 	chunksize := 128
@@ -33,8 +32,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	key := []byte(config.Password)
 
 	/* read requests */
-	var buffer bytes.Buffer
-	r.Write(&buffer)
 	plaintext := buffer.Bytes()
 
 	/* aes encrypt */
@@ -60,6 +57,13 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	/* secret sharing */
 	shares, _ := sss.Distribute(ciphertext, chunksize, totalShares, threshold)
+	return shares
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	var buffer bytes.Buffer
+	r.Write(&buffer)
+	shares := encrypt(buffer)
 
 	for i, s := range shares {
 		url := stores[i]
@@ -67,7 +71,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		reader := bytes.NewReader(buf)
 		http.Post(url, "text/json", reader)
 
-		//fmt.Print(string(buf))
+		fmt.Print(string(buf))
 	}
 	fmt.Fprintf(w, "ok")
 }
