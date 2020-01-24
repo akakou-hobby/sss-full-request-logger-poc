@@ -8,3 +8,5 @@ stores:
   - http://store7:8007/
 
 threshold: 5
+
+password: 1234567899abcdef
