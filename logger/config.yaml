@@ -9,4 +9,4 @@ stores:
 
 threshold: 5
 
-password: 1234567899abcdef
+password: "0123456789abcdef"
